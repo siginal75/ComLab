@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href=".\css\bootstrap.css">
+    <script type="text/javascript" src=".\js\bootstrap.min.js"></script>
+    <script type="text/javascript" src=".\js\bootstrap.js"></script>
+    <script type="text/javascript" src=".\js\jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src=".\js\jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href=".\css\pj.css">
+    <title>정보실</title>
+  </head>
+  <body class="col-12" style="margin-top: 1em; min-width: 1300px; justify-content: space-around; background: #99ff99;">
+    <div class="container-fluid row justify-content-center">
+      <div class="col-8 card flex-column" style="padding-bottom: 0.5em; border-color: rgba(0,0,0,0.25); background: #ffffff;">
+    		<div class="card" style="border: none;">
+    			<div class="card-body text-center">
+    				<h1 class="display-4">PS CLab</h1>
+    				<p>Welcome to Computer Lab Booking System</p>
+    			</div>
+    		</div>
+        <div class="flex-row" style="justify-content: space-between; margin-bottom: 10px;">
+          <input class="form-control display-ib vertical-center" id="entire-searcher" type="text" name="" value="" placeholder="찾을 학생의 이름을 입력하십시오." style="width: 85%;">
+          <button class="btn btn-primary display-ib vertical-center" id="entire-searcher-submit" type="button" name="button" style="width: 14%;">검색</button>
+        </div>
+        <div class="flex-row card justify-content-center first-sub-content" style="background: #f7f7f7;">
+          <div class="col-4 card input-field" style="background: #ffffff;">
+            <form action="#" method="post" class="form-row">
+              <fieldset style="width: 100%; padding-bottom: 0.4em;">
+                <legend style="font-size: 24px;">멀티미디어실 신청</legend>
+                <b>이름</b> : <br><input type="text" class="form-text" id="student-name" name="student-name" onkeydown="submission(event)" placeholder="Enter your name" autofocus required/><br><br>
+                <b>학생코드</b> : <br><input type="text" class="form-text" id="student-code" name="student-code" onkeydown="submission(event)" placeholder="Enter your code" required/><br><br>
+                <b>Password</b> : <br><input class="form-text" type="password" name="pw" value="0000" id="pw" onkeydown="submission(event)" placeholder="Enter your own password" required/><br><br>
+                <input class="btn btn-outline-success" type="button" id="submit" name="submit" value="Submit" onclick="register(document.getElementById('student-name').value,document.getElementById('student-code').value,document.getElementById('pw').value);" />
+              </fieldset>
+            </form>
+          </div>
+          <div class="col-6 card flex-column display-user" style="background: #ffffff;">
+            <div class="col-12 card flex-row no-padding no-margin display-user-header" style="max-height: 50px; margin-bottom: 10px;">
+              <strong class="user col-2 no-padding" style="margin-left: 8px; font-size: 1.2em; flex: none;">신청자</strong><strong id="booker_num" class="col-2 no-padding" style="font-size: 1.2em;">(0)</strong>
+              <div class="col-8 no-padding">
+                <button id="part_1" class="col-3 part-btn btn btn-outline-success" type="button" onclick="part_set(0);" style="color: #000000;">1부</button>
+                <button id="part_2" class="col-3 part-btn btn btn-outline-success" type="button" onclick="part_set(1);">2부</button>
+                <button id="part_3" class="col-3 part-btn btn btn-outline-success" type="button" onclick="part_set(2);">3부</button>
+                <button id="cancel" type="button" class="col-3 part-btn btn btn-success-frame" name="button">×</button>
+              </div>
+              <!-- part_n(n부)아이디를 가진 button element의 속성 중 onclick="part_set(k)"에서 k는 (n-1)의 값임 -->
+            </div>
+            <ul id="booker" class="justify-content-start card col-12 student-list"></ul>
+          </div>
+        </div>
+      </div>
+      <div id="random" class="card col-8" style="margin-top: 10px; border-color: rgba(0,0,0,0.25); background: #ffffff;">
+        <div style="margin: 6px 0 6px 0;">
+          <h4 class="vertical-center" style="display: inline-block; margin-bottom: 0;">무작위 추첨하기</h4>
+          <div class="" style="display: inline-block; margin-left: 12em;">
+            <input id="search-content" type="text" name="search" value="" class="form-control display-ib" placeholder="찾을 사람의 이름이나 코드를 입력하세요" style="width: 20em;">
+            <button id="search-submit" type="button" name="button" class="btn btn-primary display-ib" style="margin-right: 0; margin-left: 8px;">검색</button>
+          </div>
+        </div>
+        <div class="card flex-row" style="padding: 10px; border-color: rgba(0,0,0,0.25);">
+          <div class="col-3">
+            <form class="card" action="#" method="post" style="border-color: rgba(0,0,0,0.25);">
+              <div class="column" style="padding-top: 10px;">
+                <div class="">
+                  <label for="term-choice-1" style="margin-left: 20px;">1부</label><input type="radio" name="term-choice" value="1" style="margin-left: 8px;" checked>
+                  <span id="term-1" style="margin-left: 7px;">0</span>
+                </div>
+                <div class="">
+                  <label for="term-choice-2" style="margin-left: 20px;">2부</label><input type="radio" name="term-choice" value="2" style="margin-left: 8px;">
+                  <span id="term-2" style="margin-left: 7px;">0</span>
+                </div>
+                <div class="">
+                  <label for="term-choice-3" style="margin-left: 20px;">3부</label><input type="radio" name="term-choice" value="3" style="margin-left: 8px;">
+                  <span id="term-3" style="margin-left: 7px;">0</span>
+                </div>
+              </div>
+              <button id="random-start" class="btn btn-outline-success" type="button" name="button" onclick="getValue()">추첨하기</button>
+            </form>
+          </div>
+          <div class="col-3 card" style="height: 250px; border-color: rgba(0,0,0,0.25);">
+            <b>1부</b>
+            <ul id="list-user-1" class="card no-padding-left random-user-list">
+              <!-- 여기에 신청자 리스트가 들어감 -->
+            </ul>
+          </div>
+          <div class="col-3 card" style="height: 250px; border-color: rgba(0,0,0,0.25);">
+            <b>2부</b>
+            <ul id="list-user-2" class="card no-padding-left random-user-list">
+              <!-- 여기에 신청자 리스트가 들어감 -->
+            </ul>
+          </div>
+          <div class="col-3 card" style="height: 250px; border-color: rgba(0,0,0,0.25);">
+            <b>3부</b>
+            <ul id="list-user-3" class="card no-padding-left random-user-list">
+              <!-- 여기에 신청자 리스트가 들어감 -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid row justify-content-center" style="padding-top: 0.5em;">
+      <div class="col-8">
+        <div class="alert alert-dark col-12">
+          <strong>How To Use</strong>  학생코드는 (학반번호)+(도서관 층)+(도서관번호) 8자리입니다. (남자시드: 04, 여자시드: 05)
+        </div>
+        <div class="alert alert-dark col-12">
+          <strong>How To Use</strong>  예시) 송태영(1-1 10번, 3층 70번)의 학생코드 : 11100370
+        </div>
+        <div class="alert alert-dark col-12">
+          <strong>How To Use</strong>  비밀번호는 신청한 것을 다른사람이 임의로 취소하지 못하도록 하기 위해서 입력하는 것입니다.
+        </div>
+      </div>
+    </div><!-- container row justify-content-center -->
+    <script type="text/javascript" src=".\js\pj.js"></script>
+  </body>
+</html>
